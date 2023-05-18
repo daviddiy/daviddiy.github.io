@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Database Schema Migration Best Practices | David Wright’s Blog</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Database Schema Migration Best Practices" />
+<meta name="author" content="David Wright" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Real-Life Examples of Database Schema Migration Gone Right" />
+<meta property="og:description" content="Real-Life Examples of Database Schema Migration Gone Right" />
+<link rel="canonical" href="https://daviddiy.github.io/2023/02/14/database-schema-migration-best-practices.html" />
+<meta property="og:url" content="https://daviddiy.github.io/2023/02/14/database-schema-migration-best-practices.html" />
+<meta property="og:site_name" content="David Wright’s Blog" />
+<meta property="og:image" content="https://daviddiy.github.io/assets/img/database-schema-abstract.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-02-14T00:00:00+01:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://daviddiy.github.io/assets/img/database-schema-abstract.jpg" />
+<meta property="twitter:title" content="Database Schema Migration Best Practices" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"David Wright","url":"https://daviddiy.github.io/about/"},"dateModified":"2023-02-14T00:00:00+01:00","datePublished":"2023-02-14T00:00:00+01:00","description":"Real-Life Examples of Database Schema Migration Gone Right","headline":"Database Schema Migration Best Practices","image":"https://daviddiy.github.io/assets/img/database-schema-abstract.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://daviddiy.github.io/2023/02/14/database-schema-migration-best-practices.html"},"url":"https://daviddiy.github.io/2023/02/14/database-schema-migration-best-practices.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://daviddiy.github.io/feed.xml" title="David Wright&apos;s Blog" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">David Wright&#39;s Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About Me</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Database Schema Migration Best Practices</h1>
+        <p class="post-meta"><time class="dt-published" datetime="2023-02-14T00:00:00+01:00" itemprop="datePublished">
+                Feb 14, 2023
+            </time>~<time class="dt-modified" datetime="2023-05-17T01:00:00+02:00" itemprop="dateModified">
+                May 17, 2023
+            </time>
+            
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">
+                
+                    <a itemprop="url" href="https://daviddiy.github.io/about/">David Wright</a>
+                
+            </span>
+          </span>
+            </p>
+    </header>
+
+    <div class="post-content e-content" itemprop="articleBody">
+        <p>As a software developer, I can’t agree more with Nick Andreev’s article on <a href="https://www.nickandreev.ru/tools-and-techniques-for-database-schema-migration.php">Tools and Techniques for Database Schema Migration</a>. As databases become increasingly complex, migration becomes a critical aspect of any software project. It is essential to have a solid understanding of the tools and techniques available for database schema migration.</p>
+
+<p><img src="/assets/img/database-schema-abstract.jpg" alt="Database schema abstract" class="img-responsive" itemprop="image" /></p>
+
+<p>The article outlines a comprehensive approach to database schema migration, from understanding the current schema to choosing the right migration tool. In this article, I will discuss some of the key points made by Andreev and provide some SQL code examples.</p>
+
+<h3 id="understanding-the-current-schema">Understanding the Current Schema:</h3>
+
+<p>Nick emphasizes the importance of understanding the current schema before starting any migration. This involves understanding the relationships between tables, the types of data stored in each table, and any constraints or triggers that may be in place.</p>
+
+<p>One way to gain a better understanding of the current schema is to create an ER diagram. This can be done using a tool like MySQL Workbench, which provides a visual representation of the database schema.</p>
+
+<p>As you can see, the diagram shows the relationships between the various tables in the database. This can be helpful in identifying any potential issues that may arise during migration.</p>
+
+<h3 id="choosing-the-right-migration-tool">Choosing the Right Migration Tool:</h3>
+
+<p>Once you have a solid understanding of the current schema, the next step is to choose the right migration tool. Author outlines several options, including manual SQL scripts, third-party tools like Flyway or Liquibase, and built-in migration tools like those provided by Django or Ruby on Rails.</p>
+
+<p>Each option has its own benefits and drawbacks, depending on the specific needs of your project. For example, if you are working with a large, complex database, a third-party tool like Flyway or Liquibase may be the best option. These tools provide a structured approach to migration, with built-in support for version control and rollback.</p>
+
+<p>On the other hand, if you are working with a smaller database, manual SQL scripts may be the most efficient option. This approach involves writing custom SQL scripts to make changes to the database schema. Here’s an example of a SQL script to add a new column to a table:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">orders</span> <span class="k">ADD</span> <span class="k">COLUMN</span> <span class="n">shipping_address</span> <span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">255</span><span class="p">);</span></code></pre></figure>
+
+<p>As you can see, this script adds a new column called “shipping_address” to the “orders” table. This is a simple example, but manual SQL scripts can be used to make more complex changes as well.</p>
+
+<h3 id="testing-and-rollback">Testing and Rollback:</h3>
+
+<p>No matter which migration tool you choose, it is essential to thoroughly test the migration before deploying it to production. Andreev recommends creating a separate test environment to test the migration, rather than testing directly on the production database.</p>
+
+<p>In addition, it is important to have a rollback plan in place in case something goes wrong during the migration. This may involve creating a backup of the database before running the migration, or using a tool like Flyway or Liquibase to perform a rollback.</p>
+
+<h3 id="automation-and-tooling">Automation and Tooling</h3>
+
+<p>The article emphasizes the importance of leveraging automation and specialized tools for efficient schema migration. Nick Andreev rightly argues that manual migration processes are error-prone and time-consuming. By employing dedicated tools, developers can automate repetitive tasks, reduce human errors, and minimize downtime during the migration process. Tools such as Flyway, Liquibase, and Django’s migrations provide robust mechanisms for version control and managing schema changes.</p>
+
+<h3 id="version-control-and-tracking">Version Control and Tracking</h3>
+
+<p>One of the key arguments put forth in the original article is the significance of version control in schema migration. Maintaining a version history of schema changes enables organizations to track and manage the evolution of their database structure effectively. This version control allows for easier rollback, audit trails, and collaboration among development teams. The ability to review, compare, and revert to previous versions ensures a smooth and controlled migration process.</p>
+
+<h3 id="conclusion">Conclusion:</h3>
+
+<p>Finally, I fully agree with Nick’s article. Understanding the current schema, choosing the right migration tool, and thoroughly testing and planning for rollback are all essential components of a successful migration.</p>
+
+<p>As a software developer, I have found SQL code to be an indispensable tool in database schema migration. Whether writing custom SQL scripts or using built-in migration tools, SQL provides a powerful and flexible approach to making changes to the database schema.</p>
+
+<p>Overall, with the right tools and techniques in place, database schema migration doesn’t have to be a daunting task. By following Nicks’s advice and taking a structured approach, you can ensure that your migration is successful and minimizes downtime for your users.</p>
+
+    </div><div class="nav">
+        
+        
+        
+        <div class="item">
+            <h4><a href="/2023/05/17/spring-framework-database-access-odyssey.html">Spring Framework's Database Access Odyssey</a></h4>
+            <p class="post-meta"><time class="dt-published" datetime="2023-05-17T01:00:00+02:00" itemprop="datePublished">
+                    May 17, 2023
+                </time>
+            </p>
+            
+            <p>Discover the evolution of frameworks like Spring Framework for accessing databases across multiple programming languages over the last 20 years.</p>
+            
+        </div>
+        
+        
+        
+        <div class="item">
+            <h4><a href="/2023/04/18/free-hosting-services-for-diy-projects.html">Free Hosting Services for DIY Projects</a></h4>
+            <p class="post-meta"><time class="dt-published" datetime="2023-04-18T01:00:00+02:00" itemprop="datePublished">
+                    Apr 18, 2023
+                </time>
+            </p>
+            
+            <p>My favorite free hosting services for your website and application projects without breaking the bank</p>
+            
+        </div>
+        
+        
+        
+        
+        <div class="item">
+            <h4><a href="/2023/03/09/the-challenge-of-restoring-a-non-clustered-database.html">Restoring a Database Without Clustering</a></h4>
+            <p class="post-meta"><time class="dt-published" datetime="2023-03-09T00:00:00+01:00" itemprop="datePublished">
+                    Mar 9, 2023
+                </time>
+            </p>
+            
+            <p>My First Person Experience</p>
+            
+        </div>
+        
+        
+        <div class="item">
+            <h4><a href="/2023/04/18/free-hosting-services-for-diy-projects.html">Free Hosting Services for DIY Projects</a></h4>
+            <p class="post-meta"><time class="dt-published" datetime="2023-04-18T01:00:00+02:00" itemprop="datePublished">
+                    Apr 18, 2023
+                </time>
+            </p>
+            
+            <p>My favorite free hosting services for your website and application projects without breaking the bank</p>
+            
+        </div>
+        
+        
+    </div>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="https://daviddiy.github.io/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name">© 2023 David Wright</li>
+          
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>Your one-stop-shop for all things tech, from the perspective of a seasoned IT specialist.
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
