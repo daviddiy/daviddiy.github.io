@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://daviddiy.github.io/2023/02/14/database-schema-migration-best-practices.html</loc>
+<lastmod>2023-05-18T19:21:11+02:00</lastmod>
+</url>
+<url>
+<loc>https://daviddiy.github.io/2023/03/09/the-challenge-of-restoring-a-non-clustered-database.html</loc>
+<lastmod>2023-05-17T18:51:38+02:00</lastmod>
+</url>
+<url>
+<loc>https://daviddiy.github.io/2023/04/18/free-hosting-services-for-diy-projects.html</loc>
+<lastmod>2023-05-18T19:15:49+02:00</lastmod>
+</url>
+<url>
+<loc>https://daviddiy.github.io/2023/05/05/optimizing-postgre-performance.html</loc>
+<lastmod>2023-05-17T19:16:09+02:00</lastmod>
+</url>
+<url>
+<loc>https://daviddiy.github.io/2023/05/17/spring-framework-database-access-odyssey.html</loc>
+<lastmod>2023-05-18T19:08:47+02:00</lastmod>
+</url>
+<url>
+<loc>https://daviddiy.github.io/about/</loc>
+<lastmod>2023-05-10T17:25:38+02:00</lastmod>
+</url>
+<url>
+<loc>https://daviddiy.github.io/</loc>
+<lastmod>2023-03-10T13:17:41+01:00</lastmod>
+</url>
+</urlset>
